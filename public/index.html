@@ -1,0 +1,272 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTCgeophy</title>
+  <link rel="stylesheet" type="text/css" href="styles/inline.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+
+  <!-- manifest -->
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- ios stuff -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="BTCgeophy">
+  <link rel="apple-touch-icon" href="/images/icons/icon256.png">
+
+  <!-- description here -->
+  <meta name="description" content="Beyond the Castle geophysics">
+
+  <!-- theme-color -->
+  <meta name="theme-color" content="#2F3BA2" />
+
+  <link rel="stylesheet" type="text/css" href="scripts/leaflet.css">
+  <script src="scripts/leaflet.js"></script>
+  <!-- <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script> -->
+<!--
+  <script src="scripts/geotiff.js"></script>
+  <script src="scripts/plotty.js"></script>
+  <script src="scripts/leaflet-geotiff.js"></script>
+-->
+</head>
+<body>
+  <div style="float:left;">
+    <a href="https://www.facebook.com/BeyondTheCastle">
+      <img src="images/btc.jpg" height=60px>
+    </a>
+    <!-- <img src="./nhlf.png" height=30px> -->
+  </div>
+  <div style="float:right">
+    <a href="https://lancaster.ac.uk">
+      <img src="images/lu.jpg" height=50px>
+    </a>
+  </div>
+  <!--<div style="float:left">
+    <ul id='methods'>
+      <li>EMI</li>
+      <li>GPR</li>
+      <li>Mag</li>
+      <li>Res</li>
+    </ul>
+  </div>
+-->
+    <div style="float:top;">
+        <h3>Lancaster Castle Geophysical Investigations</h3>
+        <p>
+        <input type="checkbox" onchange="showGPR(this)" value="GPR">GPR |
+        <select id='qm_gpr', onchange="showQMgpr(this)">
+          <item>None</item>
+        </select>
+
+        <input type="checkbox" onchange="showEMI(this)" value="EMI">EMI |
+        <input type="checkbox" onchange="showMag(this)" value="Mag">Mag |
+        <input type="checkbox" onchange="showRes(this)" value="EMI">Res
+        <button onclick="locateMe()">Locate Me</button>
+      </p>
+    </div>
+
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    </div>
+
+    <div id="mapid" style="width: 100%; height: 90%; float: left; position: relative;" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+      <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
+        <div class="leaflet-pane leaflet-tile-pane">
+          <div class="leaflet-layer"></div>
+        </div>
+      </div>
+    </div>
+<!--
+TODO update the interface:
+- add information and picture about each method
+- add hamburger menu for phone
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+</div>
+-->
+
+<script>
+  var mymap = L.map('mapid').setView([54.052607, -2.807209], 16);
+
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+	maxZoom: 20,
+	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+		'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+		'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	   id: 'mapbox.streets'
+  }).addTo(mymap);
+  L.control.scale().addTo(mymap);
+  // TODO might need to change the access_token
+
+
+// all extents
+const boundQM_gpr = [[54.0537778, -2.8078645], [54.0526251, -2.8060598]];
+const boundQM_emi = [[54.0537845, -2.8080519], [54.0524678, -2.8057707]];
+const boundQM_mag = [[54.0537929, -2.8080323], [54.0524277, -2.8059554]];
+const boundGA_mag = [[54.0513280, -2.8106855], [54.0497982, -2.8089581]];
+const boundGA_emi = [[54.0514110, -2.8106412], [54.0497633, -2.8088762]];
+const boundGA_gpr = [[54.0504786, -2.8104487], [54.0499345, -2.8097516]];
+const boundBH_mag = [[54.0521671, -2.8049675], [54.0514320, -2.8037525]];
+const boundBH_gpr = [[54.0520916, -2.8050050], [54.0513341, -2.8036657]];
+const boundVF_emi = [[54.0521830, -2.8078637], [54.0509800, -2.8047265]];
+const boundVF_mag = [[54.0526108, -2.8080065], [54.0508374, -2.8046769]];
+const boundBH_res = [[54.0526073, -2.8080069], [54.0508474, -2.8046644]];
+const boundVF_res = [[54.0521690, -2.8050799], [54.0511572, -2.8037278]];
+const boundQM_res = [[54.0537819, -2.8080213], [54.0529481, -2.8059563]];
+const boundAerial = [[54.0543317, -2.8109869], [54.0494693, -2.8027537]];
+
+
+// GPR layers
+var layerQM_gpr = L.imageOverlay('data/qm_gpr.png', boundQM_gpr);
+var layerGA_gpr = L.imageOverlay('data/ga_gpr.png', boundGA_gpr);
+var layerBH_gpr = L.imageOverlay('data/bh_gpr.png', boundBH_gpr);
+var layers_gpr = [layerQM_gpr, layerGA_gpr, layerBH_gpr];
+
+// EMI layers
+var layerQM_emi = L.imageOverlay('data/qm_emi.png', boundQM_emi);
+var layerGA_emi = L.imageOverlay('data/ga_emi.png', boundGA_emi);
+var layerVF_emi = L.imageOverlay('data/vf_emi.png', boundVF_emi);
+var layers_emi = [layerQM_emi, layerGA_emi, layerVF_emi];
+
+// Mag layers
+var layerQM_mag = L.imageOverlay('data/qm_mag.png', boundQM_mag);
+var layerGA_mag = L.imageOverlay('data/ga_mag.png', boundGA_mag);
+var layerBH_mag = L.imageOverlay('data/bh_mag.png', boundBH_mag);
+var layerVF_mag = L.imageOverlay('data/vf_mag.png', boundVF_mag);
+var layers_mag = [layerGA_mag, layerQM_mag, layerBH_mag, layerVF_mag];
+
+// Res layers
+var layerQM_res = L.imageOverlay('data/qm_res.png', boundQM_res);
+var layerVF_res = L.imageOverlay('data/vf_res.png', boundVF_res);
+var layerBH_res = L.imageOverlay('data/bh_res.png', boundBH_res);
+var layers_res = [layerQM_res, layerVF_res, layerBH_res];
+
+// aerial layer
+var layerAerial = L.imageOverlay('data/castle-aerial.png', boundAerial);
+layerAerial.addTo(mymap)
+
+// create layer group
+var l_emi = L.layerGroup([layerQM_emi, layerGA_emi, layerVF_emi]);
+var l_gpr = L.layerGroup([layerQM_gpr, layerBH_gpr]);
+var l_mag = L.layerGroup([layerGA_mag, layerQM_mag, layerVF_mag, layerBH_mag]);
+var l_res = L.layerGroup([layerQM_res, layerVF_res, layerBH_res]);
+
+var overlayMaps = {
+  '<span style="font-size:24px">EMI</span>': l_emi,
+  '<span class="lg" style="font-size:24px">GPR</span>': l_gpr,
+  '<span class="lg" style="font-size:24px">Mag</span>': l_mag,
+  '<span class="lg" style="font-size:24px">Res</span>': l_res
+}
+
+L.control.layers(null, overlayMaps).addTo(mymap);
+
+
+function showGPR(a){
+    for (i=0; i<layers_gpr.length; i++){
+      if (a.checked){
+        layers_gpr[i].addTo(mymap)
+      } else {
+        layers_gpr[i].remove()
+      }
+    }
+  }
+
+  function showEMI(a){
+      for (i=0; i<layers_emi.length; i++){
+        if (a.checked){
+          layers_emi[i].addTo(mymap)
+        } else {
+          layers_emi[i].remove()
+        }
+      }
+    }
+
+  function showMag(a){
+      for (i=0; i<layers_mag.length; i++){
+        if (a.checked){
+          layers_mag[i].addTo(mymap)
+        } else {
+          layers_mag[i].remove()
+        }
+      }
+    }
+
+    function showRes(a){
+        for (i=0; i<layers_res.length; i++){
+          if (a.checked){
+            layers_res[i].addTo(mymap)
+          } else {
+            layers_res[i].remove()
+          }
+        }
+      }
+
+  // populate drop down menu
+  var select = document.getElementById('qm_gpr')
+  var qmlayers = []
+  for (i=0; i<32; i++){
+    var depth = (i*0.05).toFixed(2)
+    var option = document.createElement('option')
+    option.text = -depth + ' m'
+    option.value = i
+    select.add(option)
+    var fname1 = 'qm-d' + depth.replace('.','_') + '.png'
+    var layer1 = L.imageOverlay('data/qm_gpr/' + fname1, boundQM_gpr)
+    var fname2 = 'bh-d' + depth.replace('.','_') + '.png'
+    var layer2 = L.imageOverlay('data/bh_gpr/' + fname2, boundBH_gpr)
+    qmlayers.push([layer1, layer2])
+  }
+
+// show different GPR layers on Quay Meadow
+function showQMgpr(a){
+  for (i=0; i<32; i++){
+    layers = qmlayers[i]
+    for (j=0; j<layers.length; j++){
+      layer = layers[j]
+      if (i != a.selectedIndex){
+        layer.remove()
+      } else {
+        layer.addTo(mymap)
+      }
+    }
+  }
+}
+
+// user location
+function onLocationFound(e) {
+	var radius = e.accuracy / 2;
+	L.marker(e.latlng).addTo(mymap)
+		.bindPopup("You are within " + radius + " meters from this point").openPopup();
+	L.circle(e.latlng, radius).addTo(mymap);
+}
+
+function onLocationError(e) {
+	alert(e.message);
+}
+
+function locateMe(){
+  mymap.on('locationfound', onLocationFound);
+  mymap.on('locationerror', onLocationError);
+  mymap.locate({setView: true, maxZoom: 16});
+}
+
+
+</script>
+
+  <script src="/scripts/app.js"></script>
+  <!--<script src="/scripts/install.js"></script> -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((reg) => {
+              console.log('Service worker registered.', reg);
+            });
+      });
+    }
+
+  </script>
+ </body>
+</html>

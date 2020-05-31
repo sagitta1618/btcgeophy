@@ -1,0 +1,39 @@
+body {
+  font-size: 24px;
+}
+
+@media(min-width:60em){
+  html{
+    font-size: 90%;
+    }
+  }
+
+h3 {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+p {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+li {
+  font-family: sans-serif;
+  text-align: left;
+}
+
+#methods {
+  list-style-type: none;
+  margin: 5%;
+  padding: 5%;
+}
+
+#methods li {
+  background: grey;
+  padding: 20px;
+  .lg text {
+    font-size: 24px;
+    color: 'red';
+  }
+}
