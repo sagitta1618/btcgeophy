@@ -7,65 +7,65 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="location.svg"
-   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
-   id="svg8"
-   version="1.1"
-   viewBox="0 0 400 400"
+   width="400mm"
    height="400mm"
-   width="400mm">
+   viewBox="0 0 400 400"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
+   sodipodi:docname="location.svg">
   <defs
      id="defs2">
     <inkscape:path-effect
-       lpeversion="1"
-       is_visible="true"
+       effect="spiro"
        id="path-effect860"
-       effect="spiro" />
+       is_visible="true"
+       lpeversion="1" />
     <inkscape:path-effect
-       effect="spiro"
+       lpeversion="1"
+       is_visible="true"
        id="path-effect841"
-       is_visible="true"
-       lpeversion="1" />
+       effect="spiro" />
     <inkscape:path-effect
-       lpeversion="1"
-       is_visible="true"
+       effect="spiro"
        id="path-effect899"
-       effect="spiro" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect877"
-       is_visible="true"
-       lpeversion="1" />
-    <inkscape:path-effect
-       effect="spiro"
-       id="path-effect858"
        is_visible="true"
        lpeversion="1" />
     <inkscape:path-effect
        lpeversion="1"
        is_visible="true"
-       id="path-effect839"
+       id="path-effect877"
        effect="spiro" />
+    <inkscape:path-effect
+       lpeversion="1"
+       is_visible="true"
+       id="path-effect858"
+       effect="spiro" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect839"
+       is_visible="true"
+       lpeversion="1" />
   </defs>
   <sodipodi:namedview
-     inkscape:window-maximized="1"
-     inkscape:window-y="27"
-     inkscape:window-x="0"
-     inkscape:window-height="1016"
-     inkscape:window-width="1920"
-     showgrid="false"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="mm"
-     inkscape:cy="560"
-     inkscape:cx="400"
-     inkscape:zoom="0.24748737"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
+     id="base"
      pagecolor="#ffffff"
-     id="base" />
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="400"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -79,20 +79,20 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
+     id="layer1">
     <path
-       sodipodi:nodetypes="scsss"
+       id="path840"
+       style="fill:none;stroke:#000000;stroke-width:24.2;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 277.64463,123.27102 c 0,43.07981 -80.17651,233.3749 -80.17651,233.3749 0,0 -73.44324,-190.29509 -73.44324,-233.3749 0,-43.079823 34.38895,-78.00291 76.80988,-78.002907 42.42092,3e-6 76.80987,34.923094 76.80987,78.002907 z"
-       style="fill:none;stroke:#000000;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
-       id="path840" />
+       sodipodi:nodetypes="scsss" />
     <ellipse
-       ry="26.844503"
-       rx="25.979303"
-       cy="111.55028"
-       cx="200.935"
+       style="fill:#000000;stroke:#000000;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
        id="path845"
-       style="fill:#000000;stroke:#000000;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000" />
+       cx="200.935"
+       cy="111.55028"
+       rx="25.979303"
+       ry="26.844503" />
   </g>
 </svg>
