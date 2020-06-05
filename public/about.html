@@ -1,0 +1,186 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTCgeophy</title>
+  <link rel="stylesheet" type="text/css" href="styles/inline.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+
+  <!-- manifest -->
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- ios stuff -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="BTCgeophy">
+  <link rel="apple-touch-icon" href="/images/icons/icon256.png">
+
+  <!-- description here -->
+  <meta name="description" content="Beyond the Castle geophysics">
+
+  <!-- theme-color -->
+  <meta name="theme-color" content="#2F3BA2" />
+
+  <link rel="stylesheet" type="text/css" href="scripts/leaflet.css">
+  <script src="scripts/leaflet.js"></script>
+  <!-- <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script> -->
+<!--
+  <script src="scripts/geotiff.js"></script>
+  <script src="scripts/plotty.js"></script>
+  <script src="scripts/leaflet-geotiff.js"></script>
+-->
+
+  <!-- boostrap stuff -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <style type="text/css">
+    .sponsor {
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Main navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+    <a class="navbar-brand" href="8hIy35hT2dixO91GyeUXks.html">
+      <img src="images/btc-logo.png" height=40px>
+      <img src="images/lu-logo.png" height=30px>
+      Beyond the Castle
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto nav-fill">
+        <li class="nav-item active">
+          <a class="nav-link" href="map.html">Map</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="methods.html">Methods</a>
+        </li><li class="nav-item active">
+          <a class="nav-link" href="about.html">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <h2 class="text-center">Datasets</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Area</th>
+        <th>Method</th>
+        <th>Collection date</th>
+        <th>Surveyor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Aerial view</td>
+        <td>UAV</td>
+        <td>May 2014</td>
+        <td>Oxford Archeology North</td>
+      </tr>
+      <tr>
+        <td>Vicarage Field West</td>
+        <td>Resistance</td>
+        <td>May 2014</td>
+        <td>Oxford Archeology North</td>
+      </tr>
+      <tr>
+        <td>Vicarage Field East</td>
+        <td>Resistance</td>
+        <td>May 2014</td>
+        <td>Oxford Archeology North</td>
+      </tr>
+      <tr>
+        <td>Quay Meadows</td>
+        <td>Resistance</td>
+        <td>May 2014</td>
+        <td>Oxford Archeology North</td>
+      </tr>
+      <tr>
+        <td>Vicarage Field West</td>
+        <td>Magnetometry</td>
+        <td>May 2014</td>
+        <td>Oxford Archeology North</td>
+      </tr>
+      <tr>
+        <td>Vicarage Field East</td>
+        <td>Magnetometry</td>
+        <td>May 2014</td>
+        <td>Oxford Archeology North</td>
+      </tr>
+      <tr>
+        <td>Quay Meadows</td>
+        <td>Magnetometry</td>
+        <td>May 2014</td>
+        <td>Oxford Archeology North</td>
+      </tr>
+      <tr>
+        <td>Giant Axe</td>
+        <td>Magnetometry</td>
+        <td>July 2019</td>
+        <td>Lancaster Hydrogeophysical Team</td>
+      </tr>
+      <tr>
+        <td>Vicarage Field West</td>
+        <td>EMI</td>
+        <td>January 2017</td>
+        <td>Lancaster Hydrogeophysical Team</td>
+      </tr>
+      <tr>
+        <td>Quay Meadows</td>
+        <td>EMI</td>
+        <td>April 2017</td>
+        <td>Lancaster Hydrogeophysical Team</td>
+      </tr>
+      <tr>
+        <td>Giant Axe</td>
+        <td>EMI</td>
+        <td>July 2019</td>
+        <td>Lancaster Hydrogeophysical Team</td>
+      </tr>
+      <tr>
+        <td>Vicarage Field East</td>
+        <td>GPR</td>
+        <td>July 2017</td>
+        <td>Lancaster Hydrogeophysical Team</td>
+      </tr>
+      <tr>
+        <td>Quay Meadows</td>
+        <td>GPR</td>
+        <td>2018 -> 2020</td>
+        <td>Lancaster Hydrogeophysical Team</td>
+      </tr>
+      <tr>
+        <td>Giant Axe</td>
+        <td>GPR</td>
+        <td>January 2020</td>
+        <td>Lancaster Hydrogeophysical Team</td>
+      </tr>
+    <tbody>
+  </table>
+
+  <h2 class="text-center">Sponsors</h2>
+  <div class="container-fluid">
+    <img class="sponsor" src="images/sponsors/nhlf.png" height=50px></img>
+    <img class="sponsor" src="images/sponsors/ccf.jpg" height=50px></img>
+    <img class="sponsor" src="images/sponsors/dlbf.jpg" height=50px></img>
+    <img class="sponsor" src="images/sponsors/lcc.jpg" height=50px></img>
+    <img class="sponsor" src="images/sponsors/lcc-city.png" height=50px></img>
+    <img class="sponsor" src="images/sponsors/lef.png" height=50px></img>
+    <img class="sponsor" src="images/sponsors/ppl.png" height=50px></img>
+    <img class="sponsor" src="images/sponsors/lu.png" height=50px></img>
+  </div>
+
+  <hr>
+  <p style="font-size: tiny;">Webapp credits: Guillaume Blanchy and icons by Alice Cheng<p>
+
+  </script>
+ </body>
+</html>
