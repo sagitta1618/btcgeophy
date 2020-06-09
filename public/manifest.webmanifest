@@ -3,21 +3,21 @@
   "short_name": "BTCgeophy",
   "icons": [
     {
-      "src": "/images/icon128.png",
+      "src": "./images/icon128.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "/images/icon256.png",
+      "src": "./images/icon256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "/images/icon512.png",
+      "src": "./images/icon512.png",
       "sizes": "512x512",
       "type": "image/png"
     }],
-  "start_url": "/8hIy35hT2dixO91GyeUXks.html",
+  "start_url": "./8hIy35hT2dixO91GyeUXks.html",
   "display": "standalone",
   "background_color": "#3E4EB8",
   "theme_color": "#2F3BA2"
